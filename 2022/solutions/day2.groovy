@@ -1,26 +1,22 @@
-var file = new File('../input/day2')
+var file = new File('../input/day2').readLines()
 def points = 0
-file.withReader {reader ->
-  reader.eachLine {line ->
-    def lineArray = "$line".split(" ")
-    def him = Shape.fromLetter(lineArray[0])
-    def me = Shape.fromLetter(lineArray[1])
-    points = points + me.points
-    points = points + me.result(him)
-  }
+file.each {line ->
+  def lineArray = "$line".split(" ")
+  def him = Shape.fromLetter(lineArray[0])
+  def me = Shape.fromLetter(lineArray[1])
+  points = points + me.points
+  points = points + me.result(him)
 }
 
 println(points)
 
 points = 0
-file.withReader {reader ->
-  reader.eachLine {line ->
-    def lineArray = "$line".split(" ")
-    def him = Shape.fromLetter(lineArray[0])
-    def me = Shape.fromResult(him, lineArray[1])
-    points = points + me.points
-    points = points + me.result(him)
-  }
+file.each {line ->
+  def lineArray = "$line".split(" ")
+  def him = Shape.fromLetter(lineArray[0])
+  def me = Shape.fromResult(him, lineArray[1])
+  points = points + me.points
+  points = points + me.result(him)
 }
 
 println(points)
@@ -48,8 +44,6 @@ enum Shape {
     } else if (this.looses == shape.toString()) {
       return 0
     } else {
-      print( this)
-      print( shape)
       throw new IllegalStateException("WHAT!!")
     }
   }
